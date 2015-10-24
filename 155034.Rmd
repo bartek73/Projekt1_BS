@@ -1,0 +1,114 @@
+---
+title: 'Instrumenty finansowe-opcje'
+author: "B.Stachewicz"
+date: "21 October 2015"
+output: html_document
+---
+###1. Wstêp
+***
+ 
+####1.1. Definicja instrumentu finansowego
+
+**Instrumentem finansowym** - nazywamy kontrakt, w wyniku którego u jednej z jego stron powstaj¹ zobowi¹zania finansowe lub instrumenty kapita³owe a u drugiej pojawiaj¹ siê aktywa finansowe.  
+
+####1.2. Podzia³ instrumentów finansowych
+
+**Instrumenty finansowe** dzielimy ze wzglêdu na kryterium czasu, lub inaczej mówi¹c pierwotnego terminu zapadalnoœci na:    
++**krótkoterminowe** - okres do zapadalnoœci : do 1 roku  
++**œrednioterminowe** - okres do zapadalnoœci: od 1 roku do 3 lat  
++**d³ugoterminowe** - okres zapadalnoœci: powy¿ej 3 lat  
+
+###2. Opcja - definicja i opis instrumentu
+***
+
+####2.1. Definicja  
+**Opcja** jest to jeden z podstawowych instrumentów pochodnych.  
+Wystêpuj¹ dwa podstawowe rodzaje opcji:  
++**opcja kupna** (nazywana równie¿ opcj¹ call);  
++**opcja sprzeda¿y** (nazywana równie¿ opcj¹ put)   
+  
+Ogólnie opisuj¹c, instrument ten pozwala nabyæ nam prawo zakupu (b¹dŸ sprzeda¿y) okreœlonej iloœci dobra po ustalonej cenie w okreœlonym z góry terminie.
+Dziêki czemu mo¿emy zabezpieczyæ siê przed ryzykiem.   
+  
+Przytaczaj¹c pierwszy lepszy przyk³ad z brzegu, twórca oprogramowania R mo¿e kupiæ opcje sprzeda¿y  
+100 licencji oprogramowania po cenie 2 z³ za sztukê ( i tak na wolnym rynku nikt by wiêcej nie da³ za ten wyborny program)  
+w terminie 24-12-2015. A niech ma na wigilijnego karpia.  
+  
+Jak wczeœniej wspomnia³em, dla opcji musz¹ byæ okreœlone 3 wartoœci:  
++**iloœæ** instrumentu podstawowego w transakcji kupna lub sprzeda¿y  
++**ustalona cena**, po jakiej ma prawo byæ dokonana transakcja, cena ta zwana jest cen¹ wykonania
+lub cen¹ realizacji  
++**termin**, do którego mo¿na kupiæ lub sprzedaæ instrument podstawowy, tzn. wykonaæ opcjê  
+
+Wyró¿niamy jeszcze podzia³ opcji ze wzglêdu na mo¿liwoœæ ich wykonania:  
++**opcja europejska**- której realizacja mo¿liwa jest tylko w dniu wygaœniêcia  
++**opcja amerykañska** - du¿o bardziej liberalna. Jej realizacji mo¿na dokonaæ w dowolnym terminie a¿ do dnia wygaœniêcia  
+
+Co wa¿ne opcja jest **mo¿liwoœci¹** a nie **obowi¹zkiem**. Je¿eli jej realizacja by³aby dla nas niekorzystna finansowo mo¿emy z niej zrezygnowaæ.  
+
+####2.1.1. Opcja call  
+**Opcja call** - inaczej zwana opcj¹ kupna. Jest to prawo kupna okreœlonej iloœci instrumentu podstawowego po ustalonej cenie w ustalonym okresie.  
+
+####2.1.2. Opcja put  
+**Opcja put** - inaczej zwana opcj¹ sprzeda¿y Jest to prawo sprzeda¿y okreœlonej iloœci instrumentu podstawowego po ustalonej cenie w ustalonym okresie.
+
+###3. Opcja - wycena instrumentu  
+***
+
+#### 3.1. Wzór Blacka-Scholesa  
+S¹ to podstawowe wzory, które zna ka¿dy szanuj¹cy siê analityk b¹dŸ ekonometryk. S³u¿¹ one do wyceny optymalnej ceny opcji kupna, ewentualnie sprzeda¿y. Stosuje siê je do opcji typu europejskiego.  
+
+Podstawowe wartoœci wykorzystywane we wzorach:  
+**C**- cena opcji kupna  
+**P**- cena opcji sprzeda¿y  
+**S**- aktualna cena instrumentu bazowego  
+**X**- cena rozliczenia opcji  
+**T**- termin wygaœniêcia opcji (w latach)  
+**r**- stopa procentowa wolna od ryzyka  
+$\Phi$- dystrybuanta standardowego rozk³adu normalnego  
+$\sigma$ - wspó³czynnik zmiennoœci ceny instrumentu bazowego  
+
+#### 3.2. Wzór Blacka-Scholesa dla opcji sprzeda¿y  
+
+Poni¿ej prezentuje wzór na wycenê opcji sprzeda¿y:  
+  
+$P={X}e^{-rT}\Phi \left ( \frac{-ln\frac{S}{X}-(r-\frac{\sigma ^{2}}{2})T}{\sigma\sqrt{T}} \right )-S\Phi\left ( \frac{-ln\frac{S}{X}-(r+\frac{\sigma ^{2}}{2})T}{\sigma\sqrt{T}} \right )$
+
+
+#### 3.3. Wzór Blacka-Scholesa dla opcji kupna  
+
+Poni¿ej prezentuje wzór na wycenê opcji kupna:    
+  
+$C={S}\Phi \left ( \frac{ln\frac{S}{X}+(r+\frac{\sigma ^{2}}{2})T}{\sigma\sqrt{T}} \right )-Xe^{-rT}\Phi\left ( \frac{ln\frac{S}{X}+(r-\frac{\sigma ^{2}}{2})T}{\sigma\sqrt{T}} \right )$
+
+###4. Przyk³adowe zadania  
+***
+
+#### 4.1. Zadanie1  
+Znaj¹c wspó³czynnik zmiennoœci ceny instrumnetu bazowego równy 0,1  
+oblicz optymaln¹ wycenê europejskiej opcji kupna dla akcji spó³ki NiktniekorzystazLateXa S.A.   
+której aktualna cena wynosi 50 z³, cena rozliczenia to 60 z³, termin wygasniecia to 1 rok, wysokoœæ stopy procentowej to 5%.  
+
+$C={50}\Phi \left ( \frac{ln\frac{50}{60}+(0.05+\frac{0.1 ^{2}}{2})1}{0.1\sqrt{1}} \right )-60e^{-0.05}\Phi\left ( \frac{ln\frac{50}{60}+(0.05-\frac{0.1 ^{2}}{2})1}{0.1\sqrt{1}} \right)$
+
+Wyliczaj¹c z powy¿szego wzoru, co jest trywialne wiêc nie bêdê tego umieszcza³ w dokumencie,  
+wycena jest równa **0,23 PLN**.
+
+
+#### 4.2. Zadanie2  
+Znaj¹c wspó³czynnik zmiennoœci ceny instrumnetu bazowego równy 0,1   
+oblicz optymaln¹ wycene europejskiej opcji sprzeda¿y dla akcji spó³ki RStuditobankrut S.A.  
+której aktualna cena wynosi 50 z³, cena rozliczenia to 60 z³, termin wygasniecia to 1 rok, wysokoœæ stopy procentowej to 5%.  
+
+$P={60}e^{-0.05}\Phi \left ( \frac{-ln\frac{50}{60}-(0.05-\frac{0.1 ^{2}}{2})T}{0.1\sqrt{1}} \right )-50\Phi\left ( \frac{-ln\frac{50}{60}-(0.05+\frac{0.1 ^{2}}{2})T}{0.1\sqrt{1}} \right )$
+
+Ponownie wyliczaj¹c z powy¿szego wzoru, co jest oniegdaj znów trywialne,  
+wycena wychodzi **7,31 PLN**.
+
+###5. Przypisy  
+***
+
+W tej pracy korzysta³em z poni¿szych Ÿróde³:  
+*www.wikipedia.org*  
+*www.knf.gov.pl*  
+*www.jamer.pl*  
